@@ -1,36 +1,63 @@
 package com.firstcode.rough.thisbili.activity;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.firstcode.rough.thisbili.Class.Video;
 import com.firstcode.rough.thisbili.R;
-import com.firstcode.rough.thisbili.Util.HttpCallBackListener;
-import com.firstcode.rough.thisbili.Util.HttpUtil;
+import com.firstcode.rough.thisbili.Util.TabFactory;
+import com.firstcode.rough.thisbili.fragment.downloadFragment;
+import com.firstcode.rough.thisbili.fragment.homeFragement;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     private LinearLayout backGround;
     private EditText avNum;
     private Button check;
     private String TAG="bilibilijj";
+
+    private TabHost tabHost;
+    private Fragment contents;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
         backGround = (LinearLayout) findViewById(R.id.background);
-        avNum = (EditText) findViewById(R.id.av_num);
-        check = (Button) findViewById(R.id.check);
+        getSupportActionBar().hide();
+
+        tabHost = (TabHost)findViewById(R.id.tab_host);
+        tabHost.setup();
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                FragmentTransaction fragmentTransaction = getFragmentManager()
+                        .beginTransaction();
+                if(TextUtils.equals("first",tabId)){
+                    //
+                    contents = new homeFragement();
+                }else if(TextUtils.equals("second",tabId)){
+                    //
+                    contents = new downloadFragment();
+                }
+                fragmentTransaction.replace(android.R.id.tabcontent, contents,"frag");
+                fragmentTransaction.commit();
+            }
+        });
+        tabHost.addTab(tabHost.newTabSpec("first").setIndicator("主页").setContent(new TabFactory(this)));
+        tabHost.addTab(tabHost.newTabSpec("second").setIndicator("下载").setContent(new TabFactory(this)));
+
 //        背景图片透明度
         backGround.getBackground().setAlpha(100);
-        check.setOnClickListener(this);
+
     }
 
     @Override
@@ -44,39 +71,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.check:
-                String av=avNum.getText().toString();
-//                String appkey="c1b107428d337928";
-//                String secretkey="ea85624dfcf12d7cc7b2b3a94fac1f2c";
-//                String sign="";
-//                sign= MD5.getMd5("appkey="+appkey+"&id="+av+"&page=1"+secretkey);
-//                String address = "?appkey="+ appkey +"&id="+av+"&page=1&"+sign;
-
-                HttpUtil.sendRequestToGetCid(av, new HttpCallBackListener() {
-                    @Override
-                    public void onFinish(String response) {
-//                        avInfoActivity.startThisActivity(MainActivity.this, response);
-                        Intent intent = new Intent(MainActivity.this , avInfoActivity.class);
-                        intent.putExtra("response",response);
-                        startActivityForResult(intent,1);
-                    }
-
-                    @Override
-                    public void onInfo(Video video) {
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-
-                    }
-                });
-                break;
-            default:
-                break;
-        }
-    }
 }

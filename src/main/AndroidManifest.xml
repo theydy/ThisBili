@@ -27,11 +27,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".activity.downLoadActivity"
-            android:parentActivityName=".activity.MainActivity"
-            android:label="@string/title_activity_down_load"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

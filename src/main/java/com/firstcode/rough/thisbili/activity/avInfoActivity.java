@@ -2,9 +2,7 @@ package com.firstcode.rough.thisbili.activity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -139,10 +137,7 @@ public class avInfoActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-//    public static void startThisActivity(Context context, String response){
-//        Intent intent = new Intent(context, avInfoActivity.class);
-//        intent.putExtra("response",response);
-//    }
+
 
     @Override
     public void onClick(View v) {
@@ -150,13 +145,6 @@ public class avInfoActivity extends AppCompatActivity implements View.OnClickLis
         builder.setSmallIcon(R.drawable.pixiv_2_xh)
                 .setContentTitle("开始下载"+av)
                 .setContentText("downloading");
-        Intent intent = new Intent(this, downLoadActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(downLoadActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_AUTO_CANCEL;
 

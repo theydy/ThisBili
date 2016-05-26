@@ -1,12 +1,15 @@
-package com.firstcode.rough.thisbili.activity;
+package com.firstcode.rough.thisbili.fragment;
 
+
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -18,19 +21,26 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class downLoadActivity extends AppCompatActivity {
+
+public class downloadFragment extends Fragment {
 
     private ListView downloadList;
     private DownloadAdapter adapter;
     private List<FileVideo> dataList = new ArrayList<FileVideo>();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_down_load);
-        downloadList =(ListView) findViewById(R.id.download_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_download, container, false);
+        downloadList =(ListView) view.findViewById(R.id.download_list);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initDataList();
-        adapter = new DownloadAdapter(this,R.layout.item,dataList);
-        downloadList.setAdapter(adapter);
+        adapter = new DownloadAdapter(getActivity(),R.layout.item,dataList);
         downloadList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,7 +61,9 @@ public class downLoadActivity extends AppCompatActivity {
                 }
             }
         });
+        downloadList.setAdapter(adapter);
     }
+
     public void initDataList(){
         File filepath = new File(Environment.getExternalStorageDirectory()+"/ThisBili/Mydownload");
         if(Environment.getExternalStorageState().equals(

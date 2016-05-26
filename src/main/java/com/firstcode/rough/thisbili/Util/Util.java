@@ -95,14 +95,18 @@ public class Util {
                     byte[] bs = new byte[1024*2];
                     int len;
                     int countlen=0;
+                    int change=0;
                     OutputStream out = new FileOutputStream(file);
                     while((len=in.read(bs))!= -1){
-                        out.write(bs,0,len);
-                        countlen+=len;
-//                        builder.setProgress(sumLength,countlen%sumLength,false);
-//                        notification=builder.build();
-//                        notification.flags = Notification.FLAG_AUTO_CANCEL;
-//                        manager.notify(msgNum,notification);
+                        out.write(bs, 0, len);
+                        countlen += len;
+                        change++;
+                        if (change % 1000 == 0) {
+                            builder.setProgress(sumLength, countlen % sumLength, false);
+                            notification = builder.build();
+                            notification.flags = Notification.FLAG_AUTO_CANCEL;
+                            manager.notify(msgNum, notification);
+                        }
                     }
                     builder.setContentText("下载完毕").setProgress(100,100,true);
                     notification=builder.build();
