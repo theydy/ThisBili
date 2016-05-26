@@ -23,11 +23,19 @@
         android:layout_width="300dp"
         android:layout_height="200dp" />
     <Button
-        android:id="@+id/check"
+        android:id="@+id/download_mp3"
         android:visibility="gone"
         android:layout_below="@+id/desc"
         android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:id="@+id/download_mp4"
+        android:visibility="gone"
+        android:layout_below="@+id/download_mp3"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
 </RelativeLayout>

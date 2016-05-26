@@ -4,7 +4,7 @@
     package="com.firstcode.rough.thisbili">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
@@ -20,6 +20,17 @@
         <activity
             android:name=".activity.avInfoActivity"
             android:label="@string/title_activity_av_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".service.ThisService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.downLoadActivity"
+            android:parentActivityName=".activity.MainActivity"
+            android:label="@string/title_activity_down_load"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -29,7 +29,7 @@
 
 
     <Button
-        android:id="@+id/download"
+        android:id="@+id/check"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -41,5 +41,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="av2582803\nav4724863\nav4518634\nav4708131"/>
+        android:text="av2582803\nav4759474\nav4518634\nav4741875"/>
 </LinearLayout>

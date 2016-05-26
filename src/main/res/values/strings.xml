@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ThisBiLi</string>
     <string name="title_activity_av_info">avInfoActivity</string>
+    <string name="title_activity_down_load">downLoadActivity</string>
 </resources>

@@ -42,5 +42,40 @@ public class HttpUtil {
         }).start();
 
     }
-
+//    public static void test(final String url, final HttpCallBackListener listener){
+//        new Thread(new Runnable() {
+//
+//            HttpURLConnection connection=null;
+//            @Override
+//            public void run() {
+//                int ts = (int) new Date().getTime();
+//                try{
+//                    Log.d("helloworld","--------------------------------------------");
+//                    URL address = new URL("http://api.bilibili.cn/view"+url+"&ts="+ts);
+//                    Log.d("sign_lll", address.toString());
+//                    connection = (HttpURLConnection) address.openConnection();
+//                    connection.setRequestMethod("GET");
+//                    connection.setConnectTimeout(5000);
+//                    connection.setReadTimeout(5000);
+//                    connection.setRequestProperty("user-agent","ThisBiLi Android Client/1.0.0(hh@qq.com)");
+//                    InputStream in = connection.getInputStream();
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//                    StringBuilder response = new StringBuilder();
+//                    String line;
+//                    while((line=reader.readLine())!=null){
+//                        response.append(line);
+//                    }
+//                    if(listener!=null){
+//                        listener.onFinish(response.toString());
+//                    }
+//                }catch(Exception e){
+//                    e.printStackTrace();
+//                }finally{
+//                    if(connection!=null){
+//                        connection.disconnect();
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
 }
