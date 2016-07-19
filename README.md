@@ -1,2 +1,2 @@
 # ThisBili
-大概是关于bilibili的api
+>用bilibilijj提供的api实现的bilibili视频下载应用
